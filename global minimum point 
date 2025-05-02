@@ -1,0 +1,66 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNsRcuN4UbxjvhjzP4LwHrE",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/RUSHI-raj123/SINGLE-VARIABLE-NON-LINEAR-OPTIMIZATION/blob/main/global%20minimum%20point%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "guW_uYKwbHbS"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "# Define the function and its derivative\n",
+        "def f(x):\n",
+        "    return x**4 + 3*x**2 + 10\n",
+        "\n",
+        "def df(x):\n",
+        "    return 4*x**3 + 6*x\n",
+        "\n",
+        "# Gradient descent parameters\n",
+        "alpha = 0.1  # Learning rate\n",
+        "max_iter = 100  # Maximum iterations\n",
+        "tol = 1e-6  # Tolerance for convergence\n",
+        "x0 = 1.0  # Initial guess\n",
+        "\n",
+        "# Gradient descent\n",
+        "x = x0\n",
+        "for i in range(max_iter):\n",
+        "    grad = df(x)\n",
+        "    x_new = x - alpha * grad\n",
+        "    if abs(x_new - x) < tol:\n",
+        "        break\n",
+        "    x = x_new\n",
+        "\n",
+        "print(\"Optimal x:\", x)\n",
+        "print(\"Minimum value:\", f(x))"
+      ]
+    }
+  ]
+}
