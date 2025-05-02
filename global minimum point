@@ -1,0 +1,26 @@
+import numpy as np
+
+# Define the function and its derivative
+def f(x):
+    return x**4 + 3*x**2 + 10
+
+def df(x):
+    return 4*x**3 + 6*x
+
+# Gradient descent parameters
+alpha = 0.1  # Learning rate
+max_iter = 100  # Maximum iterations
+tol = 1e-6  # Tolerance for convergence
+x0 = 1.0  # Initial guess
+
+# Gradient descent
+x = x0
+for i in range(max_iter):
+    grad = df(x)
+    x_new = x - alpha * grad
+    if abs(x_new - x) < tol:
+        break
+    x = x_new
+
+print("Optimal x:", x)
+print("Minimum value:", f(x))
