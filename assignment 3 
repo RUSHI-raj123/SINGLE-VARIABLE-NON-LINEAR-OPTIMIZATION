@@ -1,0 +1,103 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOw533TZlyrY6ZvPSKi2cnx",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/RUSHI-raj123/SINGLE-VARIABLE-NON-LINEAR-OPTIMIZATION/blob/main/assignment%203%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "nqWnFHOcrhhM"
+      },
+      "outputs": [],
+      "source": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "def calculate_function(x, y):\n",
+        "    \"\"\"Calculate the value of f(x,y) = 3x² + 5e⁻ʸ + 10\"\"\"\n",
+        "    return 3 * (x ** 2) + 5 * np.exp(-y) + 10\n",
+        "\n",
+        "def compute_gradient(x, y):\n",
+        "    \"\"\"Compute the gradient vector [df/dx, df/dy]\"\"\"\n",
+        "    slope_x = 6 * x          # Derivative with respect to x\n",
+        "    slope_y = -5 * np.exp(-y)  # Derivative with respect to y\n",
+        "    return np.array([slope_x, slope_y])\n",
+        "\n",
+        "def run_gradient_descent(starting_point, learning_rate, steps):\n",
+        "    \"\"\"\n",
+        "    Perform gradient descent optimization\n",
+        "    starting_point: Initial [x, y] values\n",
+        "    learning_rate: How big each step should be\n",
+        "    steps: Number of iterations to run\n",
+        "    \"\"\"\n",
+        "    current_position = np.array(starting_point, dtype=float)\n",
+        "    path_taken = [current_position.copy()]  # Store our journey\n",
+        "\n",
+        "    for step in range(steps):\n",
+        "        # Calculate which direction is downhill\n",
+        "        current_gradient = compute_gradient(*current_position)\n",
+        "\n",
+        "        # Take a step in the downhill direction\n",
+        "        current_position -= learning_rate * current_gradient\n",
+        "\n",
+        "        # Remember where we stepped\n",
+        "        path_taken.append(current_position.copy())\n",
+        "\n",
+        "    return current_position, path_taken\n",
+        "\n",
+        "# Set up our optimization parameters\n",
+        "initial_guess = [1.0, 0.0]  # We're starting at x=1, y=0\n",
+        "step_size = 0.1              # Our learning rate\n",
+        "total_iterations = 100        # How many steps to take\n",
+        "\n",
+        "# Run the optimization\n",
+        "best_point, journey = run_gradient_descent(initial_guess, step_size, total_iterations)\n",
+        "minimum_value = calculate_function(*best_point)\n",
+        "\n",
+        "# Print our results\n",
+        "print(f\"After {total_iterations} steps, we found:\")\n",
+        "print(f\"• Best x position: {best_point[0]:.6f}\")\n",
+        "print(f\"• Best y position: {best_point[1]:.6f}\")\n",
+        "print(f\"• Minimum function value: {minimum_value:.6f}\")\n",
+        "\n",
+        "# Additional information about progress\n",
+        "print(\"\\nJourney overview:\")\n",
+        "print(f\"Starting value: {calculate_function(*initial_guess):.2f}\")\n",
+        "print(f\"Final value:    {minimum_value:.2f}\")\n",
+        "print(f\"Improvement:    {calculate_function(*initial_guess) - minimum_value:.2f}\")"
+      ],
+      "metadata": {
+        "id": "wWePuCy2tpAJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
