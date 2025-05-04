@@ -1,1 +1,1 @@
-# SINGLE-VARIABLE-NON-LINEAR-OPTIMIZATION
+simple linear regression model
